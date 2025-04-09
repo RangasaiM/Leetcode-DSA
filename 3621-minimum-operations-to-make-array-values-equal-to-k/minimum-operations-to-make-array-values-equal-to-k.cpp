@@ -18,8 +18,8 @@ public:
             }
             cnt--;
         }
-        if(cnt==1 && l>1)
-            return -1;
+        // if(cnt==1 && l>1)
+        //     return -1;
         return cnt-1;
     }
 };
