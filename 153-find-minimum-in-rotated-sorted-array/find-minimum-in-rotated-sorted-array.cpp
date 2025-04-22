@@ -5,13 +5,12 @@ public:
         int ans=INT_MAX;
         while(lo<=hi){
             int mid=(lo+hi)/2;
-            if(ans>nums[mid]) ans=nums[mid];
-            if(nums[mid]>=nums[lo]){
-                if(nums[lo]<ans) ans=nums[lo];
+            if(nums[mid]>=nums[lo]){ 
+                ans=min(ans,nums[lo]);
                 lo=mid+1;
             }
             else{
-                if(nums[mid]<ans) ans=nums[mid];
+                ans=min(ans,nums[mid]);
                 hi=mid-1;
             }
         }
