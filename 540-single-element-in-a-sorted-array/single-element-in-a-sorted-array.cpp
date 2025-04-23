@@ -12,7 +12,7 @@ public:
             if((nums[mid+1]!=nums[mid] && nums[mid-1]!=nums[mid])){
                 return nums[mid];
             }
-            else if(mid+1<n && mid-1>=0 && ((nums[mid-1]==nums[mid] && mid%2==0) || (nums[mid+1]==nums[mid] && mid%2!=0))){
+            else if((nums[mid-1]==nums[mid] && mid%2==0) || (nums[mid+1]==nums[mid] && mid%2!=0)){
                 hi=mid-1;
             }
             else{
