@@ -10,23 +10,28 @@
 class Solution {
 public:
 
-    TreeNode* helper(TreeNode* root,TreeNode*p,TreeNode*q){
-        if(root==NULL || root==p || root==q){
-            return root;
-        }
+    bool findPath(TreeNode* root,TreeNode* k,vector<TreeNode*>& path){
+        if(root==NULL) return false;
 
-        auto l=helper(root->left,p,q);
-        auto r=helper(root->right,p,q);
-
-        if(l==NULL) return r;
-        else if(r==NULL) return l;
-        else{
-            return root;
-        }
+        path.push_back(root);
+        if(root==k) return true;
+        if(findPath(root->left,k,path)||findPath(root->right,k,path)) return true;
+        path.pop_back();
+        return false;
     }
 
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        auto ans=helper(root,p,q);
-        return ans;
+        vector<TreeNode*> a;
+        vector<TreeNode*> b;
+        findPath(root,p,a);
+        findPath(root,q,b);
+        int n=min(a.size(),b.size());
+        for(int i=0;i<n;i++){
+            cout<<a[i]->val;
+            if(a[i]!=b[i]){
+                return a[i-1];
+            }
+        }
+        return a[n-1];
     }
 };
