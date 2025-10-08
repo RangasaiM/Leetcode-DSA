@@ -37,6 +37,7 @@ public:
                 }
             }
             if(rottedThisMinute)ans++;
+            else break;
         }
         return (freshcnt == 0) ? ans : -1;
     }
