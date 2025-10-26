@@ -7,6 +7,7 @@ class Solution:
         i=0
         j=0
         ans=""
+        stIndx=-1
         for ele in target:
             if ele not in freq:
                 freq[ele]=1
@@ -23,7 +24,7 @@ class Solution:
                 i+=1
             elif cnt==len(target):
                 if(minLen>=i-j):
-                    ans=s[j:i]
+                    stIndx=j
                     minLen=i-j
                 if(freq[s[j]]>=0):
                     cnt-=1
@@ -31,4 +32,4 @@ class Solution:
                 j+=1
             else:
                 break
-        return ans
+        return s[stIndx:stIndx+minLen]
