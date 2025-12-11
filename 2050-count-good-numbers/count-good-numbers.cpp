@@ -1,22 +1,25 @@
 class Solution {
-private:
-    static constexpr int mod = 1000000007;
-
 public:
-    int countGoodNumbers(long long n) {
-        // use fast exponentiation to calculate x^y % mod
-        auto quickmul = [](int x, long long y) -> int {
-            int ret = 1, mul = x;
-            while (y > 0) {
-                if (y % 2 == 1) {
-                    ret = (long long)ret * mul % mod;
-                }
-                mul = (long long)mul * mul % mod;
-                y /= 2;
-            }
-            return ret;
-        };
 
-        return (long long)quickmul(5, (n + 1) / 2) * quickmul(4, n / 2) % mod;
+    int mod = 1000000007;
+
+    long long exp(long long x,long long n){
+        long long ans=1;
+        while(n>0){
+            if(n%2==1){
+                ans=((ans%mod)*(x%mod))%mod;
+                n=n-1;
+            }
+            else{
+                x=((x%mod)*(x%mod))%mod;
+                n=n/2;
+            }
+        }
+        return ans;
+    }
+
+    int countGoodNumbers(long long n) {
+        long long ans=((exp(5,(n+1)/2)%mod)*(exp(4,n/2)%mod))%mod;
+        return ans;
     }
 };
