@@ -31,11 +31,10 @@ public:
             ans.push_back(board);
             return;
         }
-
-        for(int i=0;i<n;i++){
+        for(int i=row;i<n;i++){
             if(isSafe(n,board,i,col)){
                 board[i][col]='Q';
-                solve(n,board,0,col+1);
+                solve(n,board,row,col+1);
                 board[i][col]='.';
             }
         }
