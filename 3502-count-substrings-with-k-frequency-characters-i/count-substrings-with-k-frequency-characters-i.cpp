@@ -5,13 +5,10 @@ public:
         int i=0,j=0;
         long long cnt=0;
         int n=s.length();
+        int maxi=0;
         for (int i = 0; i < n; i++) {
            mp[s[i]]++;
-
-           int maxi=0;
-           for(auto p:mp){
-            maxi=max(maxi,p.second);
-           }
+            maxi=max(maxi,mp[s[i]]);
            
            while(j<s.size() && maxi>=k){
                cnt+=(n-i);
