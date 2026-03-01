@@ -1,37 +1,30 @@
 class Solution {
 public:
 
-    bool helper(vector<int>& nums,int total,int sum,int i,int n,vector<vector<int>>& dp){
-        if(total==sum) return true;
-        if(total<sum) return false;
-        if(i==n) return false;
-
-        if(dp[i][total]!=-1){
-            return dp[i][total]; 
-        }
+     bool helper(int ind,int k,vector<int>& arr,vector<vector<int>> &dp){
+        if(k==0) return true;
+        if(ind<0) return false;
+        if(dp[ind][k]!=-1) return dp[ind][k];
+        bool notTake=helper(ind-1,k,arr,dp);
+        bool take=false;
         
-        
-
-        bool k=helper(nums,total-nums[i],sum,i+1,n,dp); 
-        bool m=helper(nums,total,sum,i+1,n,dp); 
-        
-        return dp[i][total]=k||m;
+        if(k-arr[ind]>=0)
+            take=helper(ind-1,k-arr[ind],arr,dp);
+            
+        return dp[ind][k]=notTake||take;
     }
 
-    bool canPartition(vector<int>& nums) {
+    bool canPartition(vector<int>& arr) {
+        int n=arr.size();
         int sum=0;
-        int n=nums.size();
-
         for(int i=0;i<n;i++){
-            sum+=nums[i];
+            sum+=arr[i];
         }
-
-        if(sum%2) return false;
-
-        int total=sum;
-
-        sum=sum/2;
-        vector<vector<int>> dp(nums.size(), vector<int>(total + 1, -1));
-        return helper(nums,total,sum,0,n,dp);
+        if(sum%2!=0) return false;
+        
+        vector<vector<int>> dp(n,vector<int>(sum/2+1,-1));
+        
+        return helper(n-1,sum/2,arr,dp);
     }
+
 };
