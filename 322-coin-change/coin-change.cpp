@@ -9,11 +9,9 @@ public:
         if(dp[i][amount]!=-1) return dp[i][amount];
 
         
-        int r=helper(arr,amount-arr[i],i,dp);
+        long long r=(long long)helper(arr,amount-arr[i],i,dp)+1;
 
-        if (r != INT_MAX) r += 1;
-
-        int k=helper(arr,amount,i-1,dp);
+        long long k=helper(arr,amount,i-1,dp);
         
         return dp[i][amount]=min(r,k);
         
