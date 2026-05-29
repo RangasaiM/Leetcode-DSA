@@ -10,14 +10,16 @@ public:
         unordered_map<int,int> mp;
 
         for(int i=n-1;i>=0;i--){
-            int curr=nums2[i];
 
-            while(!st.empty() && st.top()<=curr) st.pop();
-
-            if(st.empty()) mp[curr]=-1;
-            else
-            mp[curr]=st.top();
-
+            while(!st.empty() && nums2[i]>=st.top()){
+                st.pop();
+            }
+            if(st.empty()){
+                mp[nums2[i]]=-1;
+            }
+            else{
+                mp[nums2[i]]=st.top();
+            }
             st.push(nums2[i]);
         }
 
