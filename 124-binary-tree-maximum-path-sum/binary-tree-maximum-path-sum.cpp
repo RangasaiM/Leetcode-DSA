@@ -15,7 +15,8 @@ public:
     int maxSum(TreeNode* root,int &ans){
         if(!root) return 0;
 
-        int l=max(0,maxSum(root->left,ans));
+        int l=max(maxSum(root->left,ans),0);
+
         int r=max(0,maxSum(root->right,ans));
 
         ans=max(ans,l+r+root->val);
